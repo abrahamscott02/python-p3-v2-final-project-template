@@ -1,28 +1,72 @@
-# lib/cli.py
-
+import sqlite3
 from helpers import (
-    exit_program,
-    helper_1
+    create_coach,
+    create_athlete,
+    delete_coach,
+    delete_athlete,
+    display_all_coaches,
+    display_all_athletes,
+    view_coach_athletes,
+    find_coach_by_id,
+    find_athlete_by_id,
+    exit_program
 )
 
+# Initialize database connection
+CONN = sqlite3.connect('roster.db')
+CURSOR = CONN.cursor()
+
+def menu():
+    print("Please select an option:")
+    print("0. Exit the program")
+    print("1. Create a Coach")
+    print("2. Create an Athlete")
+    print("3. Delete a Coach")
+    print("4. Delete an Athlete")
+    print("5. Display all Coaches")
+    print("6. Display all Athletes")
+    print("7. View Athletes of a Coach")
+    print("8. Find Coach by ID")
+    print("9. Find Athlete by ID")
 
 def main():
     while True:
         menu()
         choice = input("> ")
+
         if choice == "0":
-            exit_program()
+            exit_program(CONN)
+            break
+
         elif choice == "1":
-            helper_1()
+            create_coach(CURSOR)
+
+        elif choice == "2":
+            create_athlete(CURSOR)
+
+        elif choice == "3":
+            delete_coach(CURSOR)
+
+        elif choice == "4":
+            delete_athlete(CURSOR)
+
+        elif choice == "5":
+            display_all_coaches(CURSOR)
+
+        elif choice == "6":
+            display_all_athletes(CURSOR)
+
+        elif choice == "7":
+            view_coach_athletes(CURSOR)
+
+        elif choice == "8":
+            find_coach_by_id(CURSOR)
+
+        elif choice == "9":
+            find_athlete_by_id(CURSOR)
+
         else:
             print("Invalid choice")
-
-
-def menu():
-    print("Please select an option:")
-    print("0. Exit the program")
-    print("1. Some useful function")
-
 
 if __name__ == "__main__":
     main()
