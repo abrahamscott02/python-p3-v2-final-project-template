@@ -1,3 +1,8 @@
+from models.coach import Coach
+from models.athlete import Athlete
+import os
+
+
 import sqlite3
 from helpers import (
     create_coach,
@@ -16,6 +21,12 @@ from helpers import (
 CONN = sqlite3.connect('roster.db')
 CURSOR = CONN.cursor()
 
+Coach.create_table()
+Athlete.create_table()
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 def menu():
     print("Please select an option:")
     print("0. Exit the program")
@@ -30,7 +41,9 @@ def menu():
     print("9. Find Athlete by ID")
 
 def main():
+    result = ''
     while True:
+        clear_screen()
         menu()
         choice = input("> ")
 
@@ -67,6 +80,9 @@ def main():
 
         else:
             print("Invalid choice")
+
+        print("\n" + result)
+        input("\nPress Enter to return to the menu...")
 
 if __name__ == "__main__":
     main()

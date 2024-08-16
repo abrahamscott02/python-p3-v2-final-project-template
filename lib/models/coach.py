@@ -20,7 +20,7 @@ class Coach:
         if isinstance(name, str) and name.strip():
             self._name = name.strip()
         else:
-            raise ValueError("Name must be a non-empty string")
+            raise ValueError("Name cannot be an empty string")
 
     @property
     def years_experience(self):

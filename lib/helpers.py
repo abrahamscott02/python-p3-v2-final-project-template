@@ -5,14 +5,18 @@ def exit_program(conn):
     conn.close()
     print("Goodbye!")
 
+
+
 def create_coach(cursor):
     name = input("Enter coach's name: ")
-    experience_years = input("Enter years of experience: ")
+    years_experience = input("Enter years of experience: ")
     try:
-        coach = Coach.create(name, int(experience_years))
+        coach = Coach.create(name, int(years_experience))
         print(coach)
     except Exception as e:
         print(f"Error: {e}")
+
+
 
 def create_athlete(cursor):
     name = input("Enter athlete's name: ")
@@ -23,6 +27,8 @@ def create_athlete(cursor):
         print(athlete)
     except Exception as e:
         print(f"Error: {e}")
+
+
 
 def delete_coach(cursor):
     id_ = input("Enter coach's ID to delete: ")
@@ -36,6 +42,8 @@ def delete_coach(cursor):
     except ValueError:
         print("Invalid ID entered.")
 
+
+
 def delete_athlete(cursor):
     id_ = input("Enter athlete's ID to delete: ")
     try:
@@ -47,6 +55,8 @@ def delete_athlete(cursor):
             print(f"Athlete {id_} not found.")
     except ValueError:
         print("Invalid ID entered.")
+
+
 
 def display_all_coaches(cursor):
     coaches = Coach.get_all()
@@ -64,6 +74,8 @@ def display_all_athletes(cursor):
     else:
         print("No athletes found.")
 
+
+
 def view_coach_athletes(cursor):
     coach_id = input("Enter coach's ID to view their athletes: ")
     try:
@@ -80,6 +92,8 @@ def view_coach_athletes(cursor):
     except ValueError:
         print("Invalid ID entered.")
 
+
+
 def find_coach_by_id(cursor):
     id_ = input("Enter coach's ID: ")
     try:
@@ -90,6 +104,8 @@ def find_coach_by_id(cursor):
             print(f"Coach {id_} not found.")
     except ValueError:
         print("Invalid ID entered.")
+
+
 
 def find_athlete_by_id(cursor):
     id_ = input("Enter athlete's ID: ")

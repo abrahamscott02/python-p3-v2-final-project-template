@@ -63,12 +63,14 @@ class Athlete:
     @classmethod
     def create(cls, name, sport, coach_id):
         sql = "INSERT INTO athletes (name, sport, coach_id) VALUES (?, ?, ?)"
-        CURSOR.execute(sql, (self.name, self.sport, self.coach_id))
+        CURSOR.execute(sql, (name, sport, coach_id))
         CONN.commit()
 
-        self.id = CURSOR.lastrowid
-        type(self).all[self.id] = self
-        # return cls(name, sport, coach_id, CURSOR.lastrowid)
+        # Fetch the last inserted ID to create an instance of Athlete
+        id_ = CURSOR.lastrowid
+        athlete = cls(name, sport, coach_id, id_)
+        cls.all[id_] = athlete
+        return athlete
 
     @classmethod
     def get_all(cls):
